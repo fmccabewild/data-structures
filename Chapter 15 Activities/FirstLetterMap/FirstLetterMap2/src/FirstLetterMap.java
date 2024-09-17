@@ -18,23 +18,30 @@ public class FirstLetterMap
         {
 
             // Create your map here
-            ...
+            HashMap<Character, String> map = new HashMap<>();
 
             while (in.hasNext())
             {
                 String word = clean(in.next());
                 Character c = word.charAt(0);
 
-                // Update the map here
-                // Modify Worked Example 15.1
-                . . .
+                if(!map.containsKey(c))
+                {
+                    map.put(c, word);
+                }
+                else
+                {
+                    String words = map.get(c) + ", " + word;
+                    map.put(c, words);
+                }
+
 
 
             }
 
             // Print the map here in this form
             // a: [a, able, aardvark]
-            . . .
+            System.out.println(map);
         } catch (FileNotFoundException e)
         {
             System.out.println("Cannot open: " + filename);
