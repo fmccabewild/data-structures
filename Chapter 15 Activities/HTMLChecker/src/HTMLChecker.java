@@ -17,7 +17,7 @@ public class HTMLChecker
 {
     public static void main(String[] args)
     {
-        String filename = "C:\\Users\\fmccabewild\\Desktop\\Software Engineering\\data-structures\\Chapter 15 Activities\\HTMLChecker\\src\\TagSample1.html";
+        String filename = "C:\\Users\\fmccabewild\\Desktop\\Software Engineering\\data-structures\\Chapter 15 Activities\\HTMLChecker\\src\\TagSample3.html";
         String value;
         Stack<String> startTags = new Stack<>();
         boolean works = true;
