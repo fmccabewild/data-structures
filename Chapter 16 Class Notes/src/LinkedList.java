@@ -8,12 +8,19 @@ import java.util.NoSuchElementException;
 */
 public class LinkedList
 {
-
+    /*
+     * first refers to the first Node in the list
+     * If the list is empty, first will be null
+     */
+    private Node first;
 
     /**
         Constructs an empty linked list.
     */
-
+    public LinkedList()
+    {
+        this.first = null;
+    }
 
 
 
@@ -21,6 +28,14 @@ public class LinkedList
         Returns the first element in the linked list.
         @return the first element in the linked list
     */
+    public Object getFirst()
+    {
+        if(this.first == null)
+        {
+            throw new NoSuchElementException();
+        }
+        return this.first.data;
+    }
 
 
 
@@ -29,6 +44,18 @@ public class LinkedList
         Removes the first element in the linked list.
         @return the removed element
     */
+    public Object removeFirst()
+    {
+        if(this.first == null)
+        {
+            throw new NoSuchElementException();
+        }
+
+        Object element = this.first.data;
+        this.first = this.first.next;
+
+        return element;
+    }
 
 
 
@@ -38,6 +65,13 @@ public class LinkedList
         Adds an element to the front of the linked list.
         @param element the element to add
     */
+    public void addFirst(Object element)
+    {
+        Node newNode = new Node();
+        newNode.data = element;
+        newNode.next = this.first;
+        this.first = newNode;
+    }
 
 
 
@@ -47,15 +81,25 @@ public class LinkedList
         Returns an iterator for iterating through this list.
         @return an iterator for iterating through this list
     */
+    public ListIterator listIterator()
+    {
+        return new LinkedListIterator();
+    }
 
 
 
 
 
     //Class Node
+    //Node is static because it does NOT need access to anything in LinkedList
+    static class Node
+    {
+        public Node next;
+        public Object data;
+    }
 
 
-    class LinkedListIterator //implements ListIterator
+    class LinkedListIterator implements ListIterator
     {
       //private data
 
@@ -64,6 +108,10 @@ public class LinkedList
             Constructs an iterator that points to the front
             of the linked list.
         */
+        public LinkedListIterator()
+        {
+
+        }
 
 
         /**
