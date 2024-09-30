@@ -20,6 +20,7 @@ public class SizeTester
         iterator.add("Juliet");
         iterator.next();
         iterator.set("Emily");
+        iterator.add("Jared");
 
         names.removeFirst();
         
