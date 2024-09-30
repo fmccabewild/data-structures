@@ -23,8 +23,16 @@ public class LinkedList
         @return the number of elements in the list
     */
     public int size()
-    {
-        . . .
+    {   
+        int counter = 0;
+        Node now = new Node();
+        while(now != null)
+        {
+            now = first.next;
+            counter++;
+            first = now;
+        }
+        return counter;
     }
 
     /**
