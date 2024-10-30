@@ -6,9 +6,12 @@ import java.util.ArrayList;
 */
 public class Tree
 {
+    private Node root;
     
     static class Node
     {
+        public List<Node> children;
+        public Object data;
         
 
         /**
@@ -17,7 +20,12 @@ public class Tree
         */
         public int size()
         {
-            return 0;
+            int total = 1;
+            for(Node child: this.children)
+            {
+                total += child.size();
+            }
+            return total;
         }
     }
 
@@ -27,7 +35,9 @@ public class Tree
     */
     public Tree(Object rootData)
     {
-        
+        this.root = new Node();
+        this.root.data = rootData;
+        this.root.children = new ArrayList<>();
     }
 
     /**
@@ -35,7 +45,7 @@ public class Tree
     */
     public void addSubtree(Tree subtree)
     {
-        
+        this.root.children.add(subtree.root);
     }
 
     /**
@@ -44,7 +54,7 @@ public class Tree
     */
     public int size() 
     {
-        return 0;
+        return root.size();
     }
 
     // Additional methods will be added in later sections.
