@@ -110,4 +110,22 @@ public class BinaryTree
         subTreeR.root = this.root.right;
         return subTreeR;
     }
+
+    public int countNodesWithOneChild(){
+
+        return countNodesWithOneChild(root);
+    }
+
+    public static int countNodesWithOneChild(Node next){
+        if (next.left == null){
+            return 0;
+        }
+        else{
+            if (next.right == null){
+                return 1 + countNodesWithOneChild(next.left);
+            }
+            else {return countNodesWithOneChild(next.left) + countNodesWithOneChild(next.right); }
+        }
+        
+    }
 }

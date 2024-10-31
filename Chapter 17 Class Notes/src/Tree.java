@@ -58,4 +58,29 @@ public class Tree
     }
 
     // Additional methods will be added in later sections.
+
+    private static int leafCount(Node root, int total)
+    {
+        System.out.println("root:" + root.data);
+
+        if(root.children.isEmpty()){
+            total += 1;
+            System.out.println("initial total: " + total);
+        }
+        else
+        {
+            for(Node child: root.children)
+            {
+                System.out.println("child: " + child.data);
+                leafCount(child, total);
+                return total;
+            }
+        }
+        return total;
+    }
+
+    public int leafCount()
+    {
+        return Tree.leafCount(this.root, 0);
+    }
 }

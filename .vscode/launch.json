@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "DecisionTreeDemo",
+            "request": "launch",
+            "mainClass": "DecisionTreeDemo",
+            "projectName": "data-structures_1e4816c8"
+        },
+        {
+            "type": "java",
+            "name": "TraversalDemo",
+            "request": "launch",
+            "mainClass": "TraversalDemo",
+            "projectName": "data-structures_1e4816c8"
+        },
+        {
+            "type": "java",
+            "name": "TreeDemo",
+            "request": "launch",
+            "mainClass": "TreeDemo",
+            "projectName": "data-structures_1e4816c8"
+        },
+        {
+            "type": "java",
+            "name": "TreeTester",
+            "request": "launch",
+            "mainClass": "TreeTester",
+            "projectName": "data-structures_1e4816c8"
+        }
+    ]
+}

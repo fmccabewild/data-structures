@@ -21,6 +21,7 @@ public class TreeTester
       t.remove("F"); // Removing element with two children
       t.remove("D"); // Removing root
       t.print();
+      System.out.println(t.leafCount());
       System.out.println("Expected: C E G H I J");
    }
 }
