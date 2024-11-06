@@ -61,19 +61,16 @@ public class Tree
 
     private static int leafCount(Node root, int total)
     {
-        System.out.println("root:" + root.data);
 
-        if(root.children.isEmpty()){
+        int total = 0;
+        if(root.children.size() == 0){
             total += 1;
-            System.out.println("initial total: " + total);
         }
         else
         {
             for(Node child: root.children)
             {
-                System.out.println("child: " + child.data);
-                leafCount(child, total);
-                return total;
+                total = total + leafCount(child, total);
             }
         }
         return total;

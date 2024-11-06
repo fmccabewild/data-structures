@@ -12,7 +12,7 @@ public class BinarySearchTree
     */
     public BinarySearchTree()
     {   
-        
+        this.root = null;
     }
     
     /**
@@ -21,7 +21,14 @@ public class BinarySearchTree
     */
     public void add(Comparable obj) 
     {   
-        
+        Node newNode = new Node();
+        newNode.data = obj;
+        newNode.left = null;
+        newNode.right = null;
+        if(this.root == null)
+            this.root = newNode;
+        else
+            this.root.addNode(newNode);
     }
 
     /**
@@ -31,6 +38,17 @@ public class BinarySearchTree
     */
     public boolean find(Comparable obj)
     {
+        Node current = this.root;
+        while (current != null)
+        {
+            int diff = obj.compareTo(current.data);
+            if(diff == 0)
+                return true;
+            else if(diff < 0)
+                current = current.left;
+            else
+                current = current.right;
+        }
         return false;
     }
     
@@ -41,7 +59,39 @@ public class BinarySearchTree
     */
     public void remove(Comparable obj)
     {
-        
+        Node TBR = this.root;
+        Node parent = null;
+        boolean found = false;
+        while(!found && TBR != null)
+        {
+            int diff = obj.compareTo(TBR.data);
+            if (diff == 0)
+                found = true;
+            else
+            {
+                parent = TBR;
+                if (diff < 0)
+                    TBR = TBR.left;
+                else
+                    TBR = TBR.right;
+            }
+        }
+        if(!found)
+            return;
+        else
+        {
+            if(TBR.left == null || TBR.right == null)
+            {
+                Node newChild;
+
+                if(TBR.left == null)
+                    newChild = TBR.right;
+                else
+                    newChild = TBR.left;
+            }
+            if (parent == null)
+                this.root = newChild;
+        }
     }
     
     /**
@@ -67,7 +117,10 @@ public class BinarySearchTree
     */
     static class Node
     {   
-        
+        // A BST MUST BE MADE UP OF COMPARABLE OBJECTS
+        public Comparable data;
+        public Node left;
+        public Node right;
 
         /**
             Inserts a new node as a descendant of this node.
@@ -75,7 +128,23 @@ public class BinarySearchTree
         */
         public void addNode(Node newNode)
         {   
-            
+            // If diff < 0, newNode is left of this node
+            // If diff > 0,  newNode is right of this node
+            int diff = newNode.data.compareTo(data);
+            if(diff < 0)
+            {
+                if(left == null)
+                    left = newNode;
+                else
+                    left.addNode(newNode);
+            }
+            else if(diff > 0)
+            {
+                if(right == null)
+                    right = newNode;
+                else
+                    right.addNode(newNode);
+            }
         }
     }
 }
