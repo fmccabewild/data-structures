@@ -1,5 +1,6 @@
+import java.util.Stack;
 /**
-    A binary tree in which each node has two children.
+    A binary tree in which each node has at most two children.
 */
 public class BinaryTree
 {
@@ -10,8 +11,7 @@ public class BinaryTree
     */
     public BinaryTree()
     {
-        root = null;
-
+         root = null;
     } 
 
     /**
@@ -20,10 +20,10 @@ public class BinaryTree
     */
     public BinaryTree(Object rootData) 
     {
-        root = new Node();
-        root.data = rootData;
-        root.left = null;
-        root.right = null;
+        this.root = new Node();
+        this.root.data = rootData;
+        this.root.left = null;
+        this.root.right = null;
     }
 
     /**
@@ -35,8 +35,8 @@ public class BinaryTree
     public BinaryTree(Object rootData, BinaryTree left, BinaryTree right)
     {
         this(rootData);
-        root.left = left.root;
-        root.right = right.root;
+        this.root.left = left.root;
+        this.root.right = right.root;
     }
     
     static class Node
@@ -44,7 +44,6 @@ public class BinaryTree
         public Object data;
         public Node left;
         public Node right;
-        
     }
 
     /**
@@ -54,10 +53,10 @@ public class BinaryTree
     */
     private static int height(Node n)
     {
-        if(n == null)
+        if (n == null) {
             return 0;
-        else
-        {
+        }
+        else {
             return 1 + Math.max(BinaryTree.height(n.left), BinaryTree.height(n.right));
         }
     }
@@ -77,7 +76,7 @@ public class BinaryTree
     */
     public boolean isEmpty()
     {
-        return root == null;
+         return this.root == null;
     }
 
     /**
@@ -86,7 +85,7 @@ public class BinaryTree
     */
     public Object data()
     {
-         return root.data;
+         return this.root.data;
     }
     
     /**
@@ -95,9 +94,10 @@ public class BinaryTree
     */
     public BinaryTree left() 
     { 
-        BinaryTree subTreeL = new BinaryTree();
-        subTreeL.root = this.root.left; 
-        return subTreeL;
+        BinaryTree subtree = new BinaryTree();
+        subtree.root = this.root.left;
+        return subtree;
+        // return this.root.left <--- root.left is a Node, not a BinaryTree
     }
 
     /**
@@ -106,26 +106,25 @@ public class BinaryTree
     */
     public BinaryTree right() 
     { 
-        BinaryTree subTreeR = new BinaryTree();
-        subTreeR.root = this.root.right;
-        return subTreeR;
+        BinaryTree subtree = new BinaryTree();
+        subtree.root = this.root.right;
+        return subtree;
     }
 
-    public int countNodesWithOneChild(){
-
-        return countNodesWithOneChild(root);
-    }
-
-    public static int countNodesWithOneChild(Node next){
-        if (next.left == null){
-            return 0;
+    public boolean postOrder(Object dat)
+    {
+        Stack<Node> stack = new Stack();
+        stack.push(root);
+        while(!stack.isEmpty())
+        {
+            Node n = stack.pop();
+            if(n.data.equals(dat))
+                return true;
+            if(n.left != null)
+                stack.push(n.left);
+            else if(n.right != null)
+                stack.push(n.right);
         }
-        else{
-            if (next.right == null){
-                return 1 + countNodesWithOneChild(next.left);
-            }
-            else {return countNodesWithOneChild(next.left) + countNodesWithOneChild(next.right); }
-        }
-        
+        return false;
     }
 }

@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
     A tree in which each node has an arbitrary number of children.
@@ -10,9 +11,8 @@ public class Tree
     
     static class Node
     {
-        public List<Node> children;
         public Object data;
-        
+        public List<Node> children;
 
         /**
             Computes the size of the subtree whose root is this node.
@@ -21,8 +21,7 @@ public class Tree
         public int size()
         {
             int total = 1;
-            for(Node child: this.children)
-            {
+            for (Node child: this.children) {
                 total += child.size();
             }
             return total;
@@ -54,30 +53,64 @@ public class Tree
     */
     public int size() 
     {
-        return root.size();
+        return this.root.size();
     }
 
     // Additional methods will be added in later sections.
 
-    private static int leafCount(Node root, int total)
-    {
-
-        int total = 0;
-        if(root.children.size() == 0){
-            total += 1;
-        }
-        else
-        {
-            for(Node child: root.children)
-            {
-                total = total + leafCount(child, total);
-            }
-        }
-        return total;
+    /*
+     * A visitor whose visit method is called for each
+     * visited node during a tree traversal
+     */
+    public interface Visitor {
+        /*
+         * The visit method is called for each visited node.
+         * @param data: The data of the node being visited
+         */
+        void visit(Object data);
+        
     }
 
-    public int leafCount()
+    /*
+     * Traverse this tree in preorder.
+     * @param v: The visitor to be invoked on each node.
+     */
+    public void preorder(Visitor v) {
+        Tree.preorder(this.root, v);
+    }
+
+    /*
+     * Traverse the tree with a given root in preorder.
+     * @param n: The root of the tree to traverse.
+     * @param v: The visitor to be invoked on each node.
+     */
+    private static void preorder(Node n, Visitor v) {
+        if (n == null) {
+            return;
+        }
+
+        v.visit(n.data);
+
+        for (Node child: n.children) {
+            Tree.preorder(child, v);
+        }
+
+    }
+
+    public boolean depthFirst(Object dat)
     {
-        return Tree.leafCount(this.root, 0);
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty())
+        {
+            Node n = stack.pop();
+            if(n.data.equals(dat))
+                return true;
+            for(int i = n.children.size()-1; i >= 0; i--)
+            {
+                stack.push(n.children.get(i));
+            }
+        }
+        return false;
     }
 }
